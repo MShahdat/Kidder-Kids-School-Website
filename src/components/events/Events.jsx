@@ -1,6 +1,14 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeIn, defaultViewport } from '../../motion/Motion';
+import { MediaQuery } from '../../hook/MediaQuery';
+
 
 const Events = () => {
+
+  const isMobile = MediaQuery("(max-width: 639px)");
+  const isTab = MediaQuery("(min-width: 640px) and (max-width: 767px)");
+  const modVal = isTab ? 2 : 3;
 
   const event = [
     {
@@ -40,15 +48,32 @@ const Events = () => {
     },
   ]
   return (
-    <div className=' overflow-auto text-white'>
-      <div className='max-w-7xl px-4 py-12 mx-auto'>
-        <h2 className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90'>Our Latest Events</h2>
-        <p className='mt-4 tracking-wide text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</p>
-        <div className='mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2'>
+    <div className=' overflow-auto bg-white dark:bg-black text-white'>
+      <div className='max-w-6xl px-4 py-12 mx-auto'>
+        <motion.h2
+          variants={fadeIn("up", .2)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={defaultViewport}
+          className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90 dark:text-white/95'>Our Latest Events</motion.h2>
+        <motion.p
+          variants={fadeIn("up", .3)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={defaultViewport}
+          className='mt-4 tracking-wide text-black/60 dark:text-white/70 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
+        <div className='mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 space-y-4'>
           {
             event.map((item, idx) => {
+              const delay = isMobile ? 0.2 : (idx % modVal) * 0.25;
               return (
-                <div key={idx} className='bg-white h-92 relative rounded shadow-2xl flex flex-col gap-2 pb-2 hover:scale-105 duration-500 transform'>
+
+                <motion.div
+                  variants={fadeIn("up", delay)}
+                  initial="hidden"
+                  whileInView={'show'}
+                  viewport={{once: false}}
+                  key={idx} className='bg-white h-92 relative rounded shadow-2xl flex flex-col gap-2 pb-2 hover:scale-105 duration-500 transform'>
                   <div className='px-2 py-2'>
                     <img src={item.url} className='w-full h-44 object-cover rounded-t-lg'></img>
                     <h3 className='text-lg mt-1 font-medium text-black/90 line-clamp-1'>{item.title}</h3>
@@ -59,7 +84,7 @@ const Events = () => {
                     </div>
                   </div>
 
-                </div>
+                </motion.div>
               )
             })
           }

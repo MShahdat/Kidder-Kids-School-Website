@@ -8,13 +8,13 @@ import { MdAddCall } from "react-icons/md";
 
 const Header = () => {
   return (
-   <div className='bg-red-50'>
+   <div className='bg-red-50 dark:bg-black'>
      <div className='max-w-7xl px-4 lg:px-8 py-1 md:py-2 md:px-4 mx-auto bg-orange-600 text-white'
     style={{clipPath: 'inset(0% 0 0% 0 round 0% 20% 0 20%)'}}
     >
       <div className='flex items-center justify-between'>
 
-        <div className='flex flex-col sm:flex-row gap-2 sm:gap-4 text-[12px] md:text[14px] font-medium'>
+        <div className='flex flex-col sm:flex-row gap-1 sm:gap-4 text-[12px] md:text[14px] font-medium'>
           <div className='flex items-center gap-1'>
             <FaLocationDot />
             <p>145/2 Block-D Gulshan, Dhaka-1200</p>

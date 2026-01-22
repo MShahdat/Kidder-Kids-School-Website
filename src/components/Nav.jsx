@@ -6,10 +6,15 @@ import { dataContext } from '../context/Context';
 import { FaBookReader } from "react-icons/fa";
 import { IoMdArrowRoundForward } from "react-icons/io";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoSunnySharp } from "react-icons/io5";
+import { IoMoonSharp } from "react-icons/io5";
 
 
 const Nav = () => {
 
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') || 'light'
+  );
   const [open, setOpen] = useContext(dataContext);
   const [facilityOpen, setFacilityOpen] = useState(false);
   const [sideTop, setsideTop] = useState(false);
@@ -31,6 +36,23 @@ const Nav = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+   useEffect(() => {
+      if(theme === 'dark'){
+        document.documentElement.classList.add('dark');
+        console.log('dark')
+        localStorage.setItem('theme', 'dark');
+      }else{
+        console.log('light')
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light')
+      }
+    }, [theme])
+
+
+  const handleTheme = ()=> {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
+  }
 
   const navitem = [
     { path: '/', link: 'Home' },
@@ -67,7 +89,7 @@ const Nav = () => {
         <Link to={'/'} className='text-2xl sm:text-2xl lg:text-3xl font-bold uppercase'>
           <div className='flex gap-3 items-center text-orange-600'>
             <FaBookReader className='size-8 font-bold' />
-            <h3 className='font-dancing'>Kider</h3>
+            <h3 className='font-dancing tracking-wide'>Kider</h3>
           </div>
         </Link>
 
@@ -79,7 +101,7 @@ const Nav = () => {
                   <NavLink
                     to={item.path}
                     className={({ isActive }) =>
-                      `flex items-center gap-0.5 text-[18px] font-semibold tracking-[1px] 
+                      `flex items-center gap-0.5 text-[16px] font-semibold tracking-[1px] 
             ${isActive ? 'text-orange-600 font-bold underline' : ''}`
                     }
                   >
@@ -88,14 +110,14 @@ const Nav = () => {
                   </NavLink>
 
                   {/* Dropdown */}
-                  <div className='absolute left-0 top-full bg-white shadow-md rounded
+                  <div className='absolute left-0 top-full bg-white dark:bg-black shadow-md rounded
                        opacity-0 invisible group-hover:opacity-100 group-hover:visible
                        transition-all duration-300 w-40'>
                     {item.children.map((child, cidx) => (
                       <NavLink
                         key={cidx}
                         to={child.path}
-                        className='block px-4 py-2 text-[16px] font-medium hover:text-orange-700 hover:bg-gray-100 text-black'
+                        className={({isActive}) => `block px-4 py-2 text-[16px] font-medium hover:text-orange-700 hover:bg-gray-100  ${isActive ? 'text-orange-600 dark:text-orange-600': 'text-black dark:text-white'}`}
                       >
                         {child.link}
                       </NavLink>
@@ -111,7 +133,7 @@ const Nav = () => {
                 to={item.path}
                 className={({ isActive }) =>
                   `hidden md:block text-[16px] font-semibold tracking-[1px] 
-        ${isActive ? 'text-orange-600 font-bold underline' : ''}`
+        ${isActive ? 'text-orange-600 font-bold underline dark:text-orange-600' : ''}`
                 }
               >
                 {item.link}
@@ -123,11 +145,13 @@ const Nav = () => {
 
         <div className=''>
           <div className='flex items-end md:items-center gap-4'>
-
-
+            <button onClick={() => {
+            handleTheme();
+          }}>
+            {theme === 'dark' ? <IoSunnySharp className='size-7'/> : <IoMoonSharp className='size-7'/>}
+          </button>
             <div onClick={() => {
-              // setSignInOpen(true)
-            }} className='px-4 py-1 text-[16px] bg-orange-600 text-white cursor-pointer font-semibold rounded-full hidden md:block active:bg-orange-700'>
+            }} className='px-4 py-1 text-[16px] bg-orange-600  text-white cursor-pointer font-semibold rounded-full hidden md:block active:bg-orange-700 '>
               <div className='flex items-center justify-center gap-1'>
                 <h3>Join Us</h3>
                 <IoMdArrowRoundForward />
@@ -139,14 +163,13 @@ const Nav = () => {
             }} className={`block md:hidden text-white/70 border-2 border-gray-300 rounded-md px-2 py-0.5`}>
               {open ? <RxCross2 className='size-6 md:size-8' /> : <IoMdMenu className='size-6 md:size-8' />}
             </div>
-
           </div>
         </div>
 
       </nav>
 
       {/* Mobile menu */}
-      <div className={` w-1/2 fixed ${sideTop ? 'top-20' : ''} right-0 md:hidden bg-white text-black/80 shadow-2xl px-4 transform transition-transform duration-500 ${open ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={` w-1/2 fixed ${sideTop ? 'top-16' : ''} right-0 md:hidden bg-white dark:bg-black text-black/80 dark:text-white shadow-2xl px-4 transform transition-transform duration-500 ${open ? 'translate-x-0' : 'translate-x-full'}`}>
         <div className='flex flex-col gap-4 sm:px-4 mt-0 pt-4 pb-8  '>
           {navitem.map((item, idx) => {
             if (item.children) {
@@ -165,16 +188,16 @@ const Nav = () => {
 
                   
                   {facilityOpen && (
-                    <div className='bg-white rounded shadow flex flex-col py-2 gap-0'>
+                    <div className='bg-white dark:bg-black dark:border dark:border-white/20 rounded shadow flex flex-col py-2 gap-0'>
                       {item.children.map((child, cidx) => (
-                        <Link
+                        <NavLink
                           key={cidx}
                           to={child.path}
                           onClick={() => setOpen(false)}
-                          className='hover:scale-101 duration-500 hover:text-orange-600 transform text-[18px] text-black/70 font-medium px-4 py-1'
+                          className={({isActive}) => `hover:scale-101 duration-500 hover:text-orange-600 transform text-[18px]  font-medium px-4 py-1 ${isActive ? 'text-orange-600 dark:text-orange-600' : 'text-black/70 dark:text-white'}`}
                         >
                           {child.link}
-                        </Link>
+                        </NavLink>
                       ))}
                     </div>
                   )}
@@ -183,21 +206,20 @@ const Nav = () => {
             }
 
             return (
-              <Link
+              <NavLink
                 key={idx}
                 to={item.path}
                 onClick={() => setOpen(false)}
-                className='text-lg hover:scale-101 duration-500 hover:text-orange-600 transform font-semibold'
+                className={({isActive}) => `text-lg hover:scale-101 duration-500 hover:text-orange-600 transform font-semibold ${isActive ? 'text-orange-600' : ''}`}
               >
                 {item.link}
-              </Link>
+              </NavLink>
             );
           })}
 
 
           <div onClick={() => {
             setOpen(!open)
-            // setSignInOpen(true)
           }} className='cursor-pointer text-center text-lg py-1.5 bg-orange-600 text-white font-semibold rounded w-full'>
             <div className='flex items-center justify-center gap-1'>
                 <h3>Join Us</h3>

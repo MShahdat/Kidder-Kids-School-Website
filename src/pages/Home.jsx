@@ -9,6 +9,7 @@ import Class from '../components/classes/Class';
 import Teachers from '../components/techers/Teachers';
 import Appointment from '../components/appointment/Appointment';
 import Testimonials from '../components/testimonial/Testimonials';
+import Events from '../components/events/Events';
 const Home = () => {
   return (
     <div>
@@ -20,6 +21,8 @@ const Home = () => {
       <About2></About2>
       <Class></Class>
       <Teachers></Teachers>
+      <Testimonials></Testimonials>
+      <Events></Events>
       <Appointment></Appointment>
       {/* <Testimonials></Testimonials> */}
     </div>

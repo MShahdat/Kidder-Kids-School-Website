@@ -5,6 +5,10 @@ import { RiArrowRightLine, RiArrowLeftLine } from "react-icons/ri";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { testimonial } from '../../../public/testimonial';
+import {motion} from 'framer-motion';
+import { fadeIn, defaultViewport } from '../../motion/Motion';
+import { MediaQuery } from '../../hook/MediaQuery';
+
 
 const Testimonials = () => {
 
@@ -32,6 +36,7 @@ const Testimonials = () => {
 
   const settings = {
     dots: false,
+    arrows: false,
     infinite: true,
     autoplay: true,
     autoplaySpeed: 4000,
@@ -51,16 +56,26 @@ const Testimonials = () => {
   };
 
   return (
-    <div className='max-w-6xl px-4 py-16 mx-auto'>
-      
-      <h2 className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90'>
+    <div className='bg-white dark:bg-black '>
+      <div className='max-w-6xl px-4 py-16 mx-auto'> 
+      <motion.h2
+      variants={fadeIn("up", .2)}
+                      initial="hidden"
+                      whileInView={'show'}
+                      viewport={defaultViewport}
+      className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90 dark:text-white/95'>
         Our Clients Says
-      </h2>
+      </motion.h2>
 
-      <p className='mt-4 tracking-wide text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>
+      <motion.p
+      variants={fadeIn("up", .3)}
+                      initial="hidden"
+                      whileInView={'show'}
+                      viewport={defaultViewport}
+      className='mt-4 tracking-wide dark:text-white/70 text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore
         laborum accusantium quos ea excepturi deserunt quam maiores.
-      </p>
+      </motion.p>
 
       <div className='mt-8 relative'>
         <div className='absolute right-4 top-0 z-10'>
@@ -113,6 +128,7 @@ const Testimonials = () => {
         </Slider>
 
       </div>
+    </div>
     </div>
   );
 };

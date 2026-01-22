@@ -6,7 +6,9 @@ import { FaLocationDot } from "react-icons/fa6";
 import { MdAddCall } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { IoLogoYoutube } from "react-icons/io";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion';
+import { fadeIn, defaultViewport } from '../motion/Motion';
 
 const Footer = () => {
 
@@ -22,7 +24,12 @@ const Footer = () => {
   return (
     <div className='bg-[#0a0a23] text-white'>
       <div className='max-w-7xl px-4 py-8 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
-        <div>
+        <motion.div
+          variants={fadeIn('up', 0.2)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={{once: false}}
+        >
           <h3 className='mt-2 md:mt-4 text-xl uppercase text-white font-bold tracking-widest'>Get in Touch</h3>
           <div className='mt-4 text-white/80 flex flex-col gap-2'>
             <div className='flex items-center gap-1'>
@@ -34,7 +41,7 @@ const Footer = () => {
               <p>+8801885374041</p>
             </div>
             <div className='flex items-center gap-1'>
-              <MdEmail/>
+              <MdEmail />
               <p>+mdshahdat2504@gmail.com</p>
             </div>
           </div>
@@ -44,9 +51,12 @@ const Footer = () => {
             <a href='https://www.instagram.com/'><LuInstagram className='size-8 rounded-full bg-orange-600 px-1.5 py-1.5' /></a>
             <a href='https://www.instagram.com/'><IoLogoYoutube className='size-8 rounded-full bg-orange-600 px-1.5 py-1.5' /></a>
           </div>
-        </div>
-        <div
-
+        </motion.div>
+        <motion.div
+          variants={fadeIn('up', 0.35)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={{once: false}}
         >
           <h1 className='mt-4 text-xl uppercase text-white font-bold tracking-widest'>Quick Access</h1>
           <div className='mt-4 flex flex-col text-white/80 gap-1 tracking-wide'>
@@ -56,9 +66,12 @@ const Footer = () => {
             <Link to={'/privacy'}>Privacy Policy</Link>
             <Link to={'/terms&condition'}>Terms & Conditions</Link>
           </div>
-        </div>
-        <div
-
+        </motion.div>
+        <motion.div
+          variants={fadeIn('up', 0.5)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={{once: false}}
         >
           <h2 className='mt-4 text-xl uppercase text-white font-bold tracking-widest'>Photo Gallery</h2>
           <div className='mt-4 lg:mt-8 grid grid-cols-3'>
@@ -69,8 +82,12 @@ const Footer = () => {
             <img className='h-24 max-w-full object-cover' src='https://images.unsplash.com/photo-1599376672737-bd66af54c8f5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'></img>
             <img className='h-24 max-w-full object-cover' src='https://plus.unsplash.com/premium_photo-1661375206780-60e8560bf99c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D'></img>
           </div>
-        </div>
-        <div
+        </motion.div>
+        <motion.div
+          variants={fadeIn('up', 0.65)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={{once: false}}
 
         >
           <h2 className='mt-4 text-xl uppercase text-white font-bold tracking-widest'>Newsletter</h2>
@@ -79,13 +96,16 @@ const Footer = () => {
             <input onChange={(e) => setEmail(e.target.value)} type='email' value={email} placeholder='Email...' required className='bg-white text-black/70 w-full text-[16px] font-medium px-4 py-2 rounded shadow-2xl outline-none'></input>
             <button type='submit' className='bg-orange-600 text-center py-1.5 font-bold text-[16px] rounded w-full'>Subscribe</button>
           </form>
-        </div>
+        </motion.div>
       </div>
-      <div
-
+      <motion.div
+        variants={fadeIn('up', 0.2)}
+        initial="hidden"
+        whileInView={'show'}
+        viewport={{once: false}}
         className='py-4 px-4 text-white/80 bg-orange-700 text-center'>
         Copyright ©2025 All rights reserved. This template is made by Shahdat
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -1,6 +1,9 @@
 import React from 'react';
-
-
+import { FaComments } from "react-icons/fa6";
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion';
+import { fadeIn, defaultViewport } from '../../motion/Motion';
+import { MediaQuery } from '../../hook/MediaQuery';
 
 const Blog = () => {
 
@@ -14,6 +17,7 @@ const Blog = () => {
       title: 'How to pay attention to your child?',
       tag: '#kider #child #kids',
       des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, quibusdam?',
+      comment: 40,
     },
     {
       id: 2,
@@ -24,6 +28,7 @@ const Blog = () => {
       title: 'Play outdoor sports with your child',
       tag: '#kider #child #kids',
       des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      comment: 15,
     },
     {
       id: 3,
@@ -34,6 +39,7 @@ const Blog = () => {
       title: 'How to pay attention to your child?',
       tag: '#kider #child #kids',
       des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      comment: 58,
     },
     {
       id: 4,
@@ -44,6 +50,7 @@ const Blog = () => {
       title: 'Play outdoor sports with your child',
       tag: '#kider #child #kids',
       des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque,',
+      comment: 45,
     },
     {
       id: 5,
@@ -54,6 +61,7 @@ const Blog = () => {
       title: 'How to make time for your kids?',
       tag: '#kider #child #kids',
       des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, quibusdam?',
+      comment: 35,
     },
     {
       id: 6,
@@ -64,6 +72,7 @@ const Blog = () => {
       title: 'Play outdoor sports with your child',
       tag: '#kider #child #kids',
       des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      comment: 19,
     },
     {
       id: 7,
@@ -74,6 +83,7 @@ const Blog = () => {
       title: 'How to make time for your kids?',
       tag: '#kider #child #kids',
       des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, quibusdam?',
+      comment: 43,
     },
     {
       id: 8,
@@ -84,34 +94,72 @@ const Blog = () => {
       title: 'How to make time for your kids?',
       tag: '#kider #child #kids',
       des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, quibusdam?',
+      comment: 14,
     },
   ]
 
+  const isMobile = MediaQuery("(max-width: 639px)");
+  const isTab = MediaQuery("(min-width: 640px) and (max-width: 767px)");
+  const modVal = isTab ? 2 : 3;
+
   return (
-    <div className=''>
-      <div className='max-w-7xl px-4 py-12 mx-auto'>
-        <h2 className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90'>Our Blogs</h2>
-        <p className='mt-4 tracking-wide text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</p>
-        <div className='mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4'>
+    <div className='bg-white dark:bg-black dark:text-white'>
+      <div className='max-w-6xl px-4 py-12 mx-auto'>
+        <motion.h2
+          variants={fadeIn("up", .2)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={defaultViewport}
+          className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90 dark:text-white/95'>Our Blogs</motion.h2>
+        <motion.p
+          variants={fadeIn("up", .3)}
+          initial="hidden"
+          whileInView={'show'}
+          viewport={defaultViewport}
+          className='mt-4 tracking-wide dark:text-white/70 text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
+        <div className='mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 space-y-4'>
           {
             data.map((item, idx) => {
+              const delay = isMobile ? 0.2 : (idx % modVal) * 0.25;
               return (
-                <div key={idx} className='h-92 relative bg-white shadow-lg rounded-xl hover:scale-103 overflow-hidden duration-500 transform'>
-                  <img src={item.url} className='h-44 w-full object-cover rounded-xl'></img>
+                <motion.div
+                  variants={fadeIn("up", delay)}
+                  initial="hidden"
+                  whileInView={'show'}
+                  viewport={defaultViewport}
+                  key={idx}
+                  className='h-92 relative bg-white shadow-lg rounded-xl hover:scale-103 overflow-hidden duration-500 transform'
+                  >
+                  <Link to={'/blogs:${item.id}'} className=''>
+                    <img src={item.url} className='h-44 w-full object-cover rounded-xl'></img>
 
-                  <div className='px-2 mt-2'>
-                    <p className='text-orange-600 text-xs font-medium'>{item.tag}</p>
-                    <h3 className='mt-2 text-lg font-medium leading-tight line-clamp-1'>{item.title}</h3>
-                    <p className='mt-2 line-clamp-2 text-sm text-gray-500'>{item.des}</p>
-                    <div className='flex items-center gap-4 mt-4 pb-4 absolute bottom-2'>
-                      <img src={item.profile} className='h-10 w-10 mt-1 rounded-full object-cover '></img>
-                      <div className='flex flex-col leading-tight'>
-                        <p className='text-md font-semibold'>{item.author}</p>
-                        <p className='text-xs font-semibold text-gray-600'>{item.folwars} followers</p>
+                    <div className='px-2 mt-2'>
+                      <p className='text-orange-600 text-xs font-medium'>{item.tag}</p>
+                      <h3 className='mt-2 text-lg text-black/95 font-medium leading-tight line-clamp-1'>{item.title}</h3>
+                      <p className='mt-2 line-clamp-2 text-sm text-gray-500'>{item.des}</p>
+                      <div className='absolute bottom-2 left-2 right-4'>
+                        <div className=' flex justify-between items-center'>
+                          <div className='flex items-center gap-4 mt-4 pb-4 '>
+                            <img src={item.profile} className='h-10 w-10 mt-1 rounded-full object-cover '></img>
+                            <div className='flex flex-col leading-tight'>
+                              <p className='text-md text-black/95 font-semibold'>{item.author}</p>
+                              <p className='text-xs font-semibold text-gray-600'>{item.folwars} followers</p>
+                            </div>
+                          </div>
+                          {/* <div className='relative bg-black/10 w-8 mt-4 h-8'
+                        style={{clipPath: 'polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 33% 100%, 50% 75%, 0% 75%)'}}
+                        >
+                          <p className='flex flex-col items-center justify-center text-black/80 font-semibold text-[18px]'>{item.comment}</p>
+                        </div> */}
+                          <div className='mt-4 flex text-black/90 items-center gap-1.5'>
+                            <FaComments className='text-xl' />
+                            <p className='font-medium'>{item.comment}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </Link>
+                </motion.div>
               )
             })
           }
