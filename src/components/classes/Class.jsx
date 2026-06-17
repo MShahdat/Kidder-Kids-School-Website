@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { classes } from '../../../public/classes.js'
 import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion.js';
 import { MediaQuery } from '../../hook/MediaQuery.jsx';
+import { isFirstVisit } from '../../motion/visit.jsx';
 
 const Class = () => {
 
@@ -10,20 +11,20 @@ const Class = () => {
   const isTab = MediaQuery("(min-width: 640px) and (max-width: 1023px)");
 
   const modVal = isTab ? 2 : 3;
-
+const [animate] = useState(() => isFirstVisit('classes'))
   return (
     <div className='bg-white dark:bg-black dark:text-white'>
       <div className='max-w-7xl px-4 py-12 mx-auto'>
         <motion.h2
           variants={fadeIn("up", 0.2)}
-          initial="hidden"
+          initial={"hidden"}
           whileInView={'show'}
           viewport={defaultViewport}
           className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90 dark:text-white/95'>School Classes</motion.h2>
         <motion.p
-          variants={fadeIn("up", 0.3)}
-          initial="hidden"
-          whileInView={'show'}
+          variants={animate ? fadeIn("up", 0.3) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
           viewport={defaultViewport}
           className='mt-4 tracking-wide text-black/60 dark:text-white/70 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
         <div className='mt-12 md:mt-12 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-6  mx-auto'>
@@ -32,10 +33,10 @@ const Class = () => {
               const delay = isMobile ? 0.2 : (idx % modVal) * 0.25;
               return (
                 <motion.div
-                  variants={fadeIn("up", delay)}
-                  initial="hidden"
-                  whileInView={'show'}
-                  viewport={{once: false}}
+                  variants={animate ? fadeIn("up", delay) : undefined}
+                  initial={animate ? "hidden" : undefined}
+                  whileInView={animate ? 'show' : undefined}
+                  viewport={defaultViewport}
                   key={idx} className='group transition-all ease-in-out w-full sm:w-3/4 mx-auto md:w-full'>
                   <div className='group-hover:-translate-y-[12px] transform duration-500'>
                     <img src={cls.cover}

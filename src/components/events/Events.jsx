@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion';
 import { MediaQuery } from '../../hook/MediaQuery';
+import { isFirstVisit } from '../../motion/visit';
 
 
 const Events = () => {
@@ -47,6 +48,8 @@ const Events = () => {
       des: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt repudiandae autem architecto vero vitae dignissimos adipisci ad at in voluptatum. Quisquam assumenda possimus doloribus nostrum corporis amet, fugiat sapiente consectetur!',
     },
   ]
+
+  const [animate] = useState(() => isFirstVisit('events'))
   return (
     <div className=' overflow-auto bg-white dark:bg-black text-white'>
       <div className='max-w-6xl px-4 py-12 mx-auto'>
@@ -57,9 +60,9 @@ const Events = () => {
           viewport={defaultViewport}
           className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90 dark:text-white/95'>Our Latest Events</motion.h2>
         <motion.p
-          variants={fadeIn("up", .3)}
-          initial="hidden"
-          whileInView={'show'}
+          variants={animate ?  fadeIn("up", .3) : undefined}
+          initial={animate ?  "hidden" : undefined}
+          whileInView={animate ?  'show' : undefined}
           viewport={defaultViewport}
           className='mt-4 tracking-wide text-black/60 dark:text-white/70 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
         <div className='mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 space-y-4'>
@@ -69,10 +72,10 @@ const Events = () => {
               return (
 
                 <motion.div
-                  variants={fadeIn("up", delay)}
-                  initial="hidden"
-                  whileInView={'show'}
-                  viewport={{once: false}}
+                  variants={animate ?  fadeIn("up", delay) : undefined}
+                  initial={animate ?  "hidden" : undefined}
+                  whileInView={animate ?  'show' : undefined}
+                  viewport={defaultViewport}
                   key={idx} className='bg-white h-92 relative rounded shadow-2xl flex flex-col gap-2 pb-2 hover:scale-105 duration-500 transform'>
                   <div className='px-2 py-2'>
                     <img src={item.url} className='w-full h-44 object-cover rounded-t-lg'></img>

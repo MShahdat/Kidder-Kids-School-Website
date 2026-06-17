@@ -8,6 +8,7 @@ import { testimonial } from '../../../public/testimonial';
 import {motion} from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion';
 import { MediaQuery } from '../../hook/MediaQuery';
+import { isFirstVisit } from '../../motion/visit';
 
 
 const Testimonials = () => {
@@ -55,6 +56,7 @@ const Testimonials = () => {
     ]
   };
 
+  const [animate] = useState(() => isFirstVisit('testimonials'))
   return (
     <div className='bg-white dark:bg-black '>
       <div className='max-w-6xl px-4 py-16 mx-auto'> 
@@ -68,9 +70,9 @@ const Testimonials = () => {
       </motion.h2>
 
       <motion.p
-      variants={fadeIn("up", .3)}
-                      initial="hidden"
-                      whileInView={'show'}
+      variants={animate ? fadeIn("up", .3) : undefined}
+                      initial={animate ? "hidden" : undefined}
+                      whileInView={animate ?'show' : undefined}
                       viewport={defaultViewport}
       className='mt-4 tracking-wide dark:text-white/70 text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore

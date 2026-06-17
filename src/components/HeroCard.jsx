@@ -4,7 +4,7 @@ import { IoIosArrowForward, IoMdSad } from "react-icons/io";
 const HeroCard = (props) => {
 
     return (
-        <div className='relative text-white w-full h-[200px] sm:h-[260px] md:h-[280px] xl:h-[320px]'>
+        <div className='relative text-white w-full h-[200px] sm:h-[260px] md:h-[240px] xl:h-[280px]'>
             <img src={props.url}
             className="absolute inset-0 w-full h-full object-cover"
             ></img>

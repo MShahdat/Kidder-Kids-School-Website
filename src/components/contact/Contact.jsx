@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion';
 import { MediaQuery } from '../../hook/MediaQuery';
 import { label } from 'framer-motion/client';
+import { isFirstVisit } from '../../motion/visit';
 
 const con = [
   {
@@ -34,6 +35,9 @@ const Contact = () => {
 
   }
   const isMobile = MediaQuery("(max-width:767px)")
+
+  const [animate] = useState(() => isFirstVisit('about1'))
+
   return (
     <div className='bg-white dark:bg-black'>
       <div className='max-w-7xl px-4 py-16 mx-auto'>
@@ -45,18 +49,18 @@ const Contact = () => {
           viewport={defaultViewport}
           className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90 dark:text-white/95'>Get in Touch</motion.h2>
         <motion.p
-          variants={fadeIn("up", .3)}
-          initial="hidden"
-          whileInView={'show'}
+          variants={animate ? fadeIn("up", .3) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
           viewport={defaultViewport}
           className='mt-4 tracking-wide dark:text-white/70 text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
         <motion.div className='mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 space-y-4 gap-4'>
           {
             con.map((item, idx) => (
               <motion.div
-                variants={fadeIn("up", .2)}
-                initial="hidden"
-                whileInView={'show'}
+                variants={animate ? fadeIn("up", .2) : undefined}
+                initial={animate ? "hidden" : undefined}
+                whileInView={animate ? 'show' : undefined}
                 viewport={defaultViewport}
                 className='flex flex-col items-center justify-center'>
                 <div className='bg-red-50 relative w-24 h-24 rounded-full'>
@@ -72,9 +76,9 @@ const Contact = () => {
 
         <div className=' mt-16 grid grid-cols-1 md:grid-cols-2 rounded-lg'>
           <motion.div
-            variants={fadeIn(isMobile ? "up" : 'right', .3)}
-            initial="hidden"
-            whileInView={'show'}
+            variants={animate ? fadeIn(isMobile ? "up" : 'right', .3) : undefined}
+            initial={animate ? "hidden" : undefined}
+            whileInView={animate ? 'show' : undefined}
             viewport={{ once: false }}
             className='bg-orange-600 text-white'>
             <div className='mt-0 p-8'>
@@ -104,13 +108,13 @@ const Contact = () => {
             </div>
           </motion.div>
           <motion.div
-            variants={fadeIn(isMobile ? "up" : 'left', .3)}
-            initial="hidden"
-            whileInView={'show'}
+            variants={animate ? fadeIn(isMobile ? "up" : 'left', .3) : undefined}
+            initial={animate ? "hidden" : undefined}
+            whileInView={animate ? 'show' : undefined}
             viewport={{ once: false }}
             className="w-full min-h-[400px] overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217.03611072465634!2d90.49947640059956!3d23.69947466809364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b6ef045b692f%3A0x72ac0cae5d660029!2sMFXX%2BRP4%2C%20Narayanganj%201361!5e1!3m2!1sen!2sbd!4v1764966094488!5m2!1sen!2sbd"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000.03611072465634!2d90.49947640059956!3d23.69947466809364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b6ef045b692f%3A0x72ac0cae5d660029!2sMFXX%2BRP4%2C%20Narayanganj%201361!5e0!3m2!1sen!2sbd!4v1764966094488!5m2!1sen!2sbd"
               width="100%"
               height="100%"
               style={{ border: 0 }}

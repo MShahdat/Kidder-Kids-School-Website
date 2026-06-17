@@ -1,51 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion';
 import { MediaQuery } from '../../hook/MediaQuery';
+import { isFirstVisit } from '../../motion/visit';
 
 const About1 = () => {
 
   const isMobile = MediaQuery("(max-width:1023px)")
 
+  const [animate] = useState(() => isFirstVisit('about1'))
   return (
     <div className='bg-white dark:bg-black'>
       <div className='max-w-7xl px-4 sm:px-16 md:px-4 py-8 mx-auto'>
         <motion.h2
           variants={fadeIn('up', 0.2)}
-          initial="hidden"
+          initial={"hidden"}
           whileInView={'show'}
           viewport={defaultViewport}
           className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider dark:text-white text-black/90'>About Us</motion.h2>
         <motion.p
-          variants={fadeIn('up', 0.3)}
-          initial="hidden"
-          whileInView={'show'}
+          variants={animate ? fadeIn('up', 0.3) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
           viewport={defaultViewport}
           className='mt-4 tracking-wide dark:text-white/80 text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
 
         <div className='mt-12 grid grid-cols-1 lg:grid-cols-2 gap-2'>
           <div className='bg-white dark:bg-black dark:border dark:border-white/20 flex flex-col justify-center shadow-xl rounded-lg px-4 py-2'>
             <motion.h2
-              variants={fadeIn('up', 0.2)}
-              initial="hidden"
-              whileInView={'show'}
+              variants={animate ? fadeIn('up', 0.2) : undefined}
+              initial={animate ? "hidden" : undefined}
+              whileInView={animate ? 'show' : undefined}
               viewport={defaultViewport}
               className='text-4xl font-semibold font-lobster text-orange-600 leading-snug tracking-wider mt-2 lg:mt-4'>Learn More About Our Work And Our Cultural Activities</motion.h2>
             <motion.div
-              variants={fadeIn('up', 0.3)}
-              initial="hidden"
-              whileInView={'show'}
-              viewport={{once: false}}
+              variants={animate ? fadeIn('up', 0.3) : undefined}
+              initial={animate ? "hidden" : undefined}
+              whileInView={animate ? 'show' : undefined}
+              viewport={defaultViewport}
               className='mt-4 text-[16px] sm:text-[17px] tracking-wide text-black/60 dark:text-white/80'>
               <p className='mt-6'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid quo molestiae amet voluptates accusamus, consequatur ipsam sequi quaerat accusantium tempora iure ratione quam non, similique temporibus nihil perferendis deleniti nulla.</p>
               <p className='mt-4'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe rerum at cum incidunt nulla repellendus debitis, ipsam excepturi reiciendis? In laboriosam aut cumque dolores optio odit numquam minus illum quam sed, atque tempore corrupti quos fuga adipisci consequatur quisquam omnis!</p>
             </motion.div>
 
             <motion.div
-              variants={fadeIn('up', 0.4)}
-              initial="hidden"
-              whileInView={'show'}
-              viewport={{once: false}}
+              variants={animate ? fadeIn('up', 0.4) : undefined}
+              initial={animate ? "hidden" : undefined}
+              whileInView={animate ? 'show' : undefined}
+              viewport={defaultViewport}
               className='mt-8 flex  items-center justify-between w-full sm:w-2/3 pb-6'>
               <button className='px-4 sm:px-6 py-2 text-white active:bg-orange-700 bg-orange-600 font-medium rounded-full'>Read More</button>
               <div className='flex items-center gap-4'>
@@ -58,10 +60,10 @@ const About1 = () => {
             </motion.div>
           </div>
           <motion.div
-            variants={fadeIn(isMobile ? "up" : "left", 0.2)}
-            initial="hidden"
-            whileInView={'show'}
-            viewport={{once: false}}
+            variants={animate ? fadeIn(isMobile ? "up" : "left", 0.2) : undefined}
+            initial={animate ? "hidden" : undefined}
+            whileInView={animate ? 'show' : undefined}
+            viewport={defaultViewport}
             className="flex justify-center items-center py-10">
             <div className="relative w-[255px] sm:w-[400px] h-[380px] sm:h-[500px]"
             >

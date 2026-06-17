@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { teacher } from '../../../public/teacher';
 import { FaFacebookF, FaLinkedin, FaInstagram } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa";
 import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion';
 import { MediaQuery } from '../../hook/MediaQuery';
+import { isFirstVisit } from '../../motion/visit';
 
 const Teachers = () => {
 
@@ -12,7 +13,7 @@ const Teachers = () => {
   const isTab = MediaQuery("(min-width: 640px) and (max-width: 1023px)");
 
   const modVal = isTab ? 2 : 3;
-
+const [animate] = useState(() => isFirstVisit('teacher'))
   return (
     <div className='bg-white dark:bg-black dark:text-white'>
       <div className='max-w-7xl px-4 py-16 mx-auto'>
@@ -23,9 +24,9 @@ const Teachers = () => {
           viewport={defaultViewport}
           className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90 dark:text-white/95'>Our Teachers</motion.h2>
         <motion.p
-          variants={fadeIn("up", .3)}
-          initial="hidden"
-          whileInView={'show'}
+          variants={animate ? fadeIn("up", .3) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
           viewport={defaultViewport}
           className='mt-4 tracking-wide text-black/60 dark:text-white/70 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
         <div className='mt-12 space-y-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'>
@@ -34,10 +35,10 @@ const Teachers = () => {
               const delay = isMobile ? 0.2 : (idx % modVal) * 0.25;
               return (
                 <motion.div
-                  variants={fadeIn("up", delay)}
-                  initial="hidden"
-                  whileInView={'show'}
-                  viewport={{once: false}}
+                  variants={animate ? fadeIn("up", delay) : undefined}
+                  initial={animate ? "hidden" : undefined}
+                  whileInView={animate ? 'show' : undefined}
+                  viewport={defaultViewport}
                   key={tea.id} className='relative group transition-all duration-300 ease-in-out'>
                   <div className='group-hover:-translate-y-[12px] duration-500 transform'>
                     <img src={tea.url}

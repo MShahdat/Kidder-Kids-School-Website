@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaComments } from "react-icons/fa6";
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion';
 import { MediaQuery } from '../../hook/MediaQuery';
+import { isFirstVisit } from '../../motion/visit';
 
 const Blog = () => {
 
@@ -102,6 +103,7 @@ const Blog = () => {
   const isTab = MediaQuery("(min-width: 640px) and (max-width: 767px)");
   const modVal = isTab ? 2 : 3;
 
+  const [animate] = useState(() => isFirstVisit('blog'))
   return (
     <div className='bg-white dark:bg-black dark:text-white'>
       <div className='max-w-6xl px-4 py-12 mx-auto'>
@@ -112,9 +114,9 @@ const Blog = () => {
           viewport={defaultViewport}
           className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider text-black/90 dark:text-white/95'>Our Blogs</motion.h2>
         <motion.p
-          variants={fadeIn("up", .3)}
-          initial="hidden"
-          whileInView={'show'}
+          variants={animate ? fadeIn("up", .3) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
           viewport={defaultViewport}
           className='mt-4 tracking-wide dark:text-white/70 text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
         <div className='mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 space-y-4'>
@@ -123,9 +125,9 @@ const Blog = () => {
               const delay = isMobile ? 0.2 : (idx % modVal) * 0.25;
               return (
                 <motion.div
-                  variants={fadeIn("up", delay)}
-                  initial="hidden"
-                  whileInView={'show'}
+                  variants={animate ? fadeIn("up", delay) : undefined}
+                  initial={animate ? "hidden" : undefined}
+                  whileInView={animate ? 'show' : undefined}
                   viewport={defaultViewport}
                   key={idx}
                   className='h-92 relative bg-white shadow-lg rounded-xl hover:scale-103 overflow-hidden duration-500 transform'

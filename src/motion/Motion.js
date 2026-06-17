@@ -21,7 +21,7 @@ export const fadeIn = (direction, delay) => {
 };
 
 // default viewport options used across components that rely on whileInView
-export const defaultViewport = { once: false, amount: 0.5 };
+export const defaultViewport = { once: true, amount: 0.5 };
 
 export const staggerContainer = (staggerChildren, delayChildren) => {
   return {

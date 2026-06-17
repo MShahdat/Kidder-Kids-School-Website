@@ -9,6 +9,7 @@ import { IoLogoYoutube } from "react-icons/io";
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../motion/Motion';
+import { isFirstVisit } from '../motion/visit';
 
 const Footer = () => {
 
@@ -21,14 +22,16 @@ const Footer = () => {
     setEmail('')
   }
 
+  const [animate] = useState(() => isFirstVisit('footer'))
+
   return (
     <div className='bg-[#0a0a23] text-white'>
       <div className='max-w-7xl px-4 py-8 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
         <motion.div
-          variants={fadeIn('up', 0.2)}
-          initial="hidden"
-          whileInView={'show'}
-          viewport={{once: false}}
+          variants={animate ? fadeIn('up', 0.2) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
+          viewport={defaultViewport}
         >
           <h3 className='mt-2 md:mt-4 text-xl uppercase text-white font-bold tracking-widest'>Get in Touch</h3>
           <div className='mt-4 text-white/80 flex flex-col gap-2'>
@@ -53,10 +56,10 @@ const Footer = () => {
           </div>
         </motion.div>
         <motion.div
-          variants={fadeIn('up', 0.35)}
-          initial="hidden"
-          whileInView={'show'}
-          viewport={{once: false}}
+          variants={animate ? fadeIn('up', 0.35) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
+          viewport={defaultViewport}
         >
           <h1 className='mt-4 text-xl uppercase text-white font-bold tracking-widest'>Quick Access</h1>
           <div className='mt-4 flex flex-col text-white/80 gap-1 tracking-wide'>
@@ -68,10 +71,10 @@ const Footer = () => {
           </div>
         </motion.div>
         <motion.div
-          variants={fadeIn('up', 0.5)}
-          initial="hidden"
-          whileInView={'show'}
-          viewport={{once: false}}
+          variants={animate ? fadeIn('up', 0.5) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
+          viewport={defaultViewport}
         >
           <h2 className='mt-4 text-xl uppercase text-white font-bold tracking-widest'>Photo Gallery</h2>
           <div className='mt-4 lg:mt-8 grid grid-cols-3'>
@@ -84,10 +87,10 @@ const Footer = () => {
           </div>
         </motion.div>
         <motion.div
-          variants={fadeIn('up', 0.65)}
-          initial="hidden"
-          whileInView={'show'}
-          viewport={{once: false}}
+          variants={animate ? fadeIn('up', 0.65) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
+          viewport={defaultViewport}
 
         >
           <h2 className='mt-4 text-xl uppercase text-white font-bold tracking-widest'>Newsletter</h2>
@@ -99,10 +102,10 @@ const Footer = () => {
         </motion.div>
       </div>
       <motion.div
-        variants={fadeIn('up', 0.2)}
-        initial="hidden"
-        whileInView={'show'}
-        viewport={{once: false}}
+        variants={animate ? fadeIn('up', 0.2) : undefined}
+        initial={animate ? "hidden" : undefined}
+        whileInView={animate ? 'show' : undefined}
+        viewport={defaultViewport}
         className='py-4 px-4 text-white/80 bg-orange-700 text-center'>
         Copyright ©2025 All rights reserved. This template is made by Shahdat
       </motion.div>

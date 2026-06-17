@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion';
 import { MediaQuery } from '../../hook/MediaQuery';
+import { isFirstVisit } from '../../motion/visit';
 
 const Appointment = () => {
 
@@ -47,19 +48,21 @@ const Appointment = () => {
 
   const isMobile = MediaQuery("(max-width: 767px)");
 
+  const [animate] = useState(() => isFirstVisit('appointment'))
+
   return (
     <div className='bg-white dark:bg-black text-white'>
       <div className='max-w-7xl px-4 py-16 mx-auto'>
         <div className=' rounded-xl min:h-[430px]'>
           <div className=' grid grid-cols-1 md:grid-cols-2 gap-0'>
             <motion.div
-              variants={fadeIn(isMobile ? "up" : "right", 0.3)}
-              initial="hidden"
-              whileInView={'show'}
-              viewport={{once: false}}
+              variants={animate ? fadeIn(isMobile ? "up" : "right", 0.3) : undefined}
+              initial={animate ? "hidden" : undefined}
+              whileInView={animate ? 'show' : undefined}
+              viewport={defaultViewport}
 
               className='mt-0 py-4 px-4 bg-orange-600'>
-              <h2 className='pt-4 text-4xl font-medium font-lobster tracking-widest'>Make Appointment</h2>
+              <h2 className='pt-4 text-4xl font-medium font-lobster tracking-widest'>Take Appointment</h2>
               <form ref={form} onSubmit={formhandle} className='w-full px-2 mt-4'>
                 <div className='grid grid-cols-2 gap-4'>
                   <div>
@@ -90,10 +93,10 @@ const Appointment = () => {
               </form>
             </motion.div>
             <motion.div
-              variants={fadeIn("up", 0.3)}
-              initial="hidden"
-              whileInView={'show'}
-              viewport={{once: false}}
+              variants={animate ? fadeIn("up", 0.3) : undefined}
+              initial={animate ? "hidden" : undefined}
+              whileInView={animate ? 'show' : undefined}
+              viewport={defaultViewport}
               className="">
               <img src='https://images.unsplash.com/photo-1473662711507-13345f9d447c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' className='w-full h-[430px] object-cover rounded-r-xl' ></img>
             </motion.div>

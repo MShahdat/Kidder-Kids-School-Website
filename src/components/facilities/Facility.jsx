@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaBusAlt } from "react-icons/fa";
 import { IoIosFootball } from "react-icons/io";
 import { FaHouseChimneyUser } from "react-icons/fa6";
@@ -8,6 +8,7 @@ import { GiSchoolBag } from "react-icons/gi";
 import { motion } from 'framer-motion';
 import { fadeIn, defaultViewport } from '../../motion/Motion.js';
 import { MediaQuery } from '../../hook/MediaQuery.jsx';
+import { isFirstVisit } from '../../motion/visit.jsx';
 
 const facility = [
   {
@@ -71,19 +72,21 @@ const Facility = () => {
 
   const modVal = isTab ? 2 : 3;
 
+  const [animate] = useState(() => isFirstVisit('facility'))
+
   return (
     <div className='bg-white dark:bg-black dark:text-white'>
       <div className='max-w-7xl px-4 py-16 mx-auto'>
         <motion.h2
           variants={fadeIn('up', 0.2)}
-          initial="hidden"
+          initial={"hidden"}
           whileInView={'show'}
-          viewport={defaultViewport}
+          viewport={{once : false}}
           className='text-center text-4xl md:text-5xl font-medium font-lobster tracking-wider dark:text-white text-black/90'>Our Services</motion.h2>
         <motion.p
-          variants={fadeIn('up', 0.3)}
-          initial="hidden"
-          whileInView={'show'}
+          variants={animate ? fadeIn('up', 0.3) : undefined}
+          initial={animate ? "hidden" : undefined}
+          whileInView={animate ? 'show' : undefined}
           viewport={defaultViewport}
           className='mt-4 tracking-wide dark:text-white/80 text-black/60 text-center mx-auto w-full md:w-4/5 xl:w-2/3'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt dolores at tempore laborum accusantium quos ea excepturi deserunt quam maiores.</motion.p>
         <div className='mt-4 md:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 space-y-4'>
@@ -92,10 +95,10 @@ const Facility = () => {
             const delay = isMobile ? 0.2 : (idx % modVal) * 0.25;
             return (
               <motion.div
-                variants={fadeIn("up", delay)}
-                initial="hidden"
-                whileInView={'show'}
-                viewport={{once: false}}
+                variants={animate ? fadeIn("up", delay) : undefined}
+                initial={animate ? "hidden" : undefined}
+                whileInView={animate ? 'show' : undefined}
+                viewport={defaultViewport}
                 key={idx} className="flex flex-col items-center justify-center">
                 <div className="group cursor-pointer transition-all duration-500 ease-in-out">
                   <div className="w-full flex justify-center mt-10">
