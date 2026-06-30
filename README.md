@@ -1,6 +1,6 @@
 # 🎒 Kider School Website
 
-## 🌐 **Live Website:** https://kider-school-website.netlify.app/
+## 🌐 **Live Website:** https://kider-kids-school-website.vercel.app/
 
 Kider School Website is a **fully responsive, modern educational website** designed for a kids school. The project focuses on clean UI, smooth user experience, and well-structured content presentation. It is built using **React.js** and **Tailwind CSS** with modern libraries to ensure performance, accessibility, and interactivity across all devices.
 
